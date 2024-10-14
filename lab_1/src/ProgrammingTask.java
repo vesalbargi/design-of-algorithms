@@ -1,13 +1,15 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProgrammingTask {
+class Main {
     public static void main(String[] args) {
         ProgrammingTask programmingTask = new ProgrammingTask();
         programmingTask.test();
     }
+}
 
-    private void test() {
+public class ProgrammingTask {
+    public void test() {
         // Test Part A
         System.out.println("Part A");
         float[] arrayA = { 1.3f, 2.5f, 3.7f, 4.2f, 1.3f, 5.3f };

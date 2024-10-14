@@ -2,20 +2,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class HashMap {
+class Program {
+    public static void main(String[] args) {
+        MyHashMap myHashMap = new MyHashMap();
+        myHashMap.test();
+        // myHashMap.print();
+    }
+}
+
+public class MyHashMap {
     private MyLinkedList[] entry;
 
-    public HashMap() {
+    public MyHashMap() {
         entry = new MyLinkedList[100];
         for (int i = 0; i < 100; i++) {
             entry[i] = new MyLinkedList();
         }
-    }
-
-    public static void main(String[] args) {
-        HashMap hashMap = new HashMap();
-        hashMap.test();
-        // hashMap.print();
     }
 
     public void test() {
