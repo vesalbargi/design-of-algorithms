@@ -73,21 +73,27 @@ class Bank2 {
 
     public HashMap<Integer, Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
         HashMap<Integer, Integer> totalCountsInRange = new HashMap<>();
-        int i = 1;
-        for (Account acc : accounts.values()) {
-            int min = ranges.get(i - 1);
-            int max = ranges.get(i);
-            Integer index = totalCountsInRange.get(i - 1);
-            if (index == null) {
-                if (acc.getBalance() >= min && acc.getBalance() <= max) {
-                    totalCountsInRange.put(i - 1, index);
+        for (int i = 0; i < ranges.size() - 1; i++) {
+            int max = ranges.get(i + 1);
+            int count = 0;
+            for (Account acc : accounts.values()) {
+                double balance = acc.getBalance();
+                if (balance >= ranges.get(i) && balance <= max) {
+                    count++;
                 }
             }
+            totalCountsInRange.put(i, count);
         }
         return totalCountsInRange;
     }
 
     public void reportRanges(ArrayList<Integer> ranges, HashMap<Integer, Integer> countsPerRange) {
-
+        System.out.println();
+        for (int i = 0; i < ranges.size() - 1; i++) {
+            System.out.println(
+                    "Range " + i + ": Number of accounts between " + ranges.get(i) + " and " + ranges.get(i + 1) + " = "
+                            + countsPerRange.get(i));
+        }
+        System.out.println();
     }
 }

@@ -96,13 +96,13 @@ public class Program {
         HashMap<String, Integer> counts2 = bank2.getTotalCountPerCity();
         bank2.reportCity(cities2, counts2);
 
-        // HashMap<Integer,Integer> countsPerRange1=bank2.getTotalCountPerRange(ranges);
-        // bank2.reportRanges(ranges,countsPerRange1);
+        HashMap<Integer, Integer> countsPerRange1 = bank2.getTotalCountPerRange(ranges);
+        bank2.reportRanges(ranges, countsPerRange1);
 
     }
 
-    public static void withdraw(Account acc, double amount) // UI method
-    {
+    // UI method
+    public static void withdraw(Account acc, double amount) {
         if (acc.withdraw(amount)) {
             System.out.println(" withdraw was succesful and the new balance is " + acc.getBalance());
         } else {
@@ -110,8 +110,8 @@ public class Program {
         }
     }
 
-    public static void addAccount(Bank bank, Account acc) // UI method
-    {
+    // UI method
+    public static void addAccount(Bank bank, Account acc) {
         if (bank.addAccount(acc)) {
             System.out.println("Account has been created successfully");
         } else {

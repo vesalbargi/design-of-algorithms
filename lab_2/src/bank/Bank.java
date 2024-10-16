@@ -103,12 +103,12 @@ public class Bank {
 
     public ArrayList<Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
         ArrayList<Integer> totalCountsInRange = new ArrayList<>();
-        for (int i = 1; i < ranges.size(); i++) {
-            int max = ranges.get(i);
+        for (int i = 0; i < ranges.size() - 1; i++) {
+            int max = ranges.get(i + 1);
             int count = 0;
             for (Account acc : accounts) {
                 double balance = acc.getBalance();
-                if (balance >= ranges.get(i - 1) && balance <= max) {
+                if (balance >= ranges.get(i) && balance <= max) {
                     count++;
                 }
             }
