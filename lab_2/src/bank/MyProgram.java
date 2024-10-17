@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class RandomTest {
+public class MyProgram {
     private static final int TEST_NUM = 1000;
     private static final int TEST_REP = 10;
     private static final String ADD = "add";
@@ -13,16 +13,78 @@ public class RandomTest {
     private static final String RANGE = "range";
     private ArrayList<Account> accounts;
 
-    public RandomTest() {
+    public MyProgram() {
         this.accounts = new ArrayList<>();
     }
 
     public static void main(String[] args) {
         Bank bank = new Bank("Test Bank");
         Bank2 bank2 = new Bank2("Test Bank2");
-        RandomTest randomTest = new RandomTest();
-        randomTest.generateAccounts();
-        randomTest.timeTest(bank, bank2);
+        MyProgram myProgram = new MyProgram();
+        myProgram.generateAccounts();
+        // myProgram.timeTest(bank, bank2);
+        myProgram.automatedTest(bank, bank2);
+    }
+
+    public void automatedTest(Bank bank, Bank2 bank2) {
+        System.out.println("Automated test started");
+
+        System.out.println("\nTesting Bank: add account (valid)");
+        for (Account acc : accounts) {
+            addAccount(bank, acc);
+        }
+
+        System.out.println("\nTesting Bank2: add account (valid)");
+        for (Account acc : accounts) {
+            addAccount(bank2, acc);
+        }
+
+        System.out.println("\nTesting Bank: add account (duplicate)");
+        for (Account acc : accounts) {
+            addAccount(bank, acc);
+        }
+
+        System.out.println("\nTesting Bank2: add account (duplicate)");
+        for (Account acc : accounts) {
+            addAccount(bank2, acc);
+        }
+
+        System.out.println("\nTesting Bank: find account (valid)");
+        int randomId = (int) (Math.random() * TEST_NUM);
+        findAccount(bank, randomId);
+
+        System.out.println("\nTesting Bank2: find account (valid)");
+        int randomId2 = (int) (Math.random() * TEST_NUM);
+        findAccount(bank2, randomId2);
+
+        System.out.println("\nTesting Bank: find account (invalid)");
+        findAccount(bank, TEST_NUM + 1);
+
+        System.out.println("\nTesting Bank2: find account (invalid)");
+        findAccount(bank2, TEST_NUM + 1);
+
+        System.out.println("\nTesting Bank: city aggregation");
+        ArrayList<String> cities = bank.populateDistinctCityList();
+        ArrayList<Double> balances = bank.getTotalBalancePerCity(cities);
+        ArrayList<Integer> counts = bank.getTotalCountPerCity(cities);
+        bank.reportTotalPerCity(cities, counts, balances);
+
+        System.out.println("\nTesting Bank2: city aggregation");
+        HashMap<String, Double> balances2 = bank2.getTotalBalancePerCity();
+        HashMap<String, Integer> counts2 = bank2.getTotalCountPerCity();
+        bank2.reportCity(balances2, counts2);
+
+        System.out.println("\nTesting Bank: range aggregation");
+        Integer[] r = { 1, 1000, 10000, 100000, 10000000 };
+        ArrayList<Integer> ranges = new ArrayList<>(Arrays.asList(r));
+        ArrayList<Integer> countsPerRange = bank.getTotalCountPerRange(ranges);
+        bank.reportRanges(ranges, countsPerRange);
+
+        System.out.println("\nTesting Bank2: range aggregation");
+        HashMap<Integer, Integer> countsPerRange2 = bank2.getTotalCountPerRange(ranges);
+        bank2.reportRanges(ranges, countsPerRange2);
+
+        System.out.println("Automated test finished");
     }
 
     public void timeTest(Bank bank, Bank2 bank2) {
