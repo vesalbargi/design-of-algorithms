@@ -8,8 +8,17 @@ In this lab, we explored key concepts from the Design of Algorithms course to so
 ## Screenshots of Output
 Below are screenshots showcasing the output of our algorithms:
 
-### Output
-![]()
+### Program Output
+![Program](Program.png)
 
-### Output
-![]()
+### Time Output
+![Time](Time.png)
+
+### Add Output
+![Add](Add.png)
+
+### Find Output
+![Find](Find.png)
+
+### Aggregation Output
+![Aggregation](Aggregation.png)
