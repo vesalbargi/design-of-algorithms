@@ -1,11 +1,12 @@
 package bank;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author hooman
  */
-
-import java.util.*;
 
 class Bank2 {
     public String name;

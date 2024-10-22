@@ -2,67 +2,54 @@ package bank;
 
 import java.util.Objects;
 
-import searchstructures.SearchStructure;
+public class MyHashMap<K, D> extends SearchStructure<K, D> {
+    private MyLinkedList<K, D>[] entry;
 
-public class MyHashMap<K, V> extends SearchStructure {
-    private MyLinkedList<K, V>[] entry;
-
+    @SuppressWarnings("unchecked")
     public MyHashMap() {
         entry = new MyLinkedList[100];
         for (int i = 0; i < 100; i++) {
-            entry[i] = new MyLinkedList<K, V>();
+            entry[i] = new MyLinkedList<K, D>();
         }
     }
 
-    public void put(K key, V value) {
+    @Override
+    public boolean insert(K key, D data) {
         int hashKey = getHash(key);
-        entry[hashKey].insert(key, value);
+        return entry[hashKey].insert(key, data);
     }
 
+    @Override
     public boolean delete(K key) {
         int hashKey = getHash(key);
         return entry[hashKey].delete(key);
     }
 
-    public V get(K key) {
+    @Override
+    public D search(K key) {
         int hashKey = getHash(key);
         return entry[hashKey].search(key);
     }
 
-    private int getHash(K key) {
-        return Math.abs(Objects.hashCode(key)) % entry.length;
-    }
-
-    @Override
-    public boolean insert(Integer key, Integer data) {
-        K k = (K) key;
-        V v = (V) data;
-        int hashKey = getHash(key);
-        return entry[hashKey].insert(k, v);
-    }
-
-    @Override
-    public boolean delete(Integer key) {
-        int hashKey = getHash(key);
-        return entry[hashKey].delete((K) key);
-    }
-
-    @Override
-    public Integer search(Integer key) {
-        int hashKey = getHash(key);
-        V value = entry[hashKey].search((K) key);
-        return (Integer) value;
-    }
-
     @Override
     public void print() {
-        for (int i = 0; i < entry.length; i++) {
-            System.out.print("Entry " + i + ": ");
-            entry[i].print();
+        String result = "{";
+        boolean firstEntry = true;
+
+        for (MyLinkedList<K, D> list : entry) {
+            if (list.head != null) {
+                if (!firstEntry) {
+                    result += ", ";
+                }
+                result += list.print();
+                firstEntry = false;
+            }
         }
+        result += "}";
+        System.out.println(result);
     }
 
-    private int getHash(Integer key) {
+    private int getHash(K key) {
         return Math.abs(Objects.hashCode(key)) % entry.length;
     }
 }
@@ -72,16 +59,16 @@ public class MyHashMap<K, V> extends SearchStructure {
  * @author Hooman
  */
 
-class Item<K, V> {
+class Item<K, D> {
     public K key;
-    public V data;
+    public D data;
 
     public Item() {
         // key = null;
         // data = null;
     }
 
-    public Item(K key, V data) {
+    public Item(K key, D data) {
         this.key = key;
         this.data = data;
     }
@@ -92,12 +79,12 @@ class Item<K, V> {
     }
 }
 
-class MyLinkedList<K, V> {
+class MyLinkedList<K, D> {
     class Node {
-        Item<K, V> item;
+        Item<K, D> item;
         Node next;
 
-        public Node(K key, V data) {
+        public Node(K key, D data) {
             this.item = new Item<>(key, data);
             next = null;
             // previous = null;
@@ -106,7 +93,7 @@ class MyLinkedList<K, V> {
 
     public Node head = null;
 
-    public boolean insert(K key, V data) {
+    public boolean insert(K key, D data) {
         Node node = new Node(key, data);
         if (head == null) {
             head = node;
@@ -150,7 +137,7 @@ class MyLinkedList<K, V> {
         return false;
     }
 
-    public V search(K key) {
+    public D search(K key) {
         Node pointer = head;
         while (pointer != null) {
             if (pointer.item.key.equals(key)) {
@@ -161,12 +148,18 @@ class MyLinkedList<K, V> {
         return null;
     }
 
-    public void print() {
+    public String print() {
+        String result = "";
         Node pointer = head;
+        boolean firstItem = true;
         while (pointer != null) {
-            System.out.print(pointer.item);
+            if (!firstItem) {
+                result += ", ";
+            }
+            result += pointer.item.key + "=" + pointer.item.data;
             pointer = pointer.next;
+            firstItem = false;
         }
-        System.out.println();
+        return result;
     }
 }

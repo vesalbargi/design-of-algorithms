@@ -1,11 +1,11 @@
 package bank;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hooman
  */
-
-import java.util.*;
 
 public class Bank {
     private String name;
