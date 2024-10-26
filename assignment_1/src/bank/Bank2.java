@@ -2,13 +2,14 @@ package bank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 /**
  *
- * @author hooman
+ * @author Hooman
  */
 
-class Bank2 {
+public class Bank2 {
     public String name;
     public HashMap<Integer, Account> accounts;
 
@@ -35,6 +36,14 @@ class Bank2 {
         for (Account acc : accounts.values()) {
             acc.print();
         }
+    }
+
+    public double calcTotalBalance() {
+        double total = 0;
+        for (Account acc : accounts.values()) {
+            total += acc.getBalance();
+        }
+        return total;
     }
 
     public HashMap<String, Double> getTotalBalancePerCity() {
@@ -72,7 +81,7 @@ class Bank2 {
         }
     }
 
-    public HashMap<Integer, Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
+    public ArrayList<Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
         HashMap<Integer, Integer> totalCountsInRange = new HashMap<>();
         for (int i = 0; i < ranges.size() - 1; i++) {
             int max = ranges.get(i + 1);
@@ -85,7 +94,8 @@ class Bank2 {
             }
             totalCountsInRange.put(i, count);
         }
-        return totalCountsInRange;
+        return (ArrayList<Integer>) totalCountsInRange.values().stream()
+                .collect(Collectors.toList());
     }
 
     public void reportRanges(ArrayList<Integer> ranges, HashMap<Integer, Integer> countsPerRange) {

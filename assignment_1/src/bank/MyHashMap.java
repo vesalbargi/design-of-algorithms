@@ -19,6 +19,11 @@ public class MyHashMap<K, D> extends SearchStructure<K, D> {
         return entry[hashKey].put(key, data);
     }
 
+    public D get(K key) {
+        int hashKey = getHash(key);
+        return entry[hashKey].search(key);
+    }
+
     @Override
     public boolean insert(K key, D data) {
         int hashKey = getHash(key);

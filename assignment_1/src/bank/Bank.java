@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 /**
  *
- * @author hooman
+ * @author Hooman
  */
 
 public class Bank {
-    private String name;
-    private ArrayList<Account> accounts;
+    public String name;
+    public ArrayList<Account> accounts;
 
     public Bank(String name) {
         this.name = name;

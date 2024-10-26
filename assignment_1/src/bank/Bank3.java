@@ -1,8 +1,9 @@
 package bank;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-class Bank3 {
+public class Bank3 {
     public String name;
     public MyHashMap<Integer, Account> accounts;
 
@@ -12,7 +13,7 @@ class Bank3 {
     }
 
     public Account findAccount(int id) {
-        return accounts.search(id);
+        return accounts.get(id);
     }
 
     public boolean addAccount(Account account) {
@@ -30,10 +31,18 @@ class Bank3 {
         }
     }
 
+    public double calcTotalBalance() {
+        double total = 0;
+        for (Account acc : accounts.getValues()) {
+            total += acc.getBalance();
+        }
+        return total;
+    }
+
     public MyHashMap<String, Double> getTotalBalancePerCity() {
         MyHashMap<String, Double> totalBalances = new MyHashMap<>();
         for (Account acc : accounts.getValues()) {
-            Double balance = totalBalances.search(acc.getCity());
+            Double balance = totalBalances.get(acc.getCity());
             if (balance == null) {
                 totalBalances.put(acc.getCity(), acc.getBalance());
             } else {
@@ -46,7 +55,7 @@ class Bank3 {
     public MyHashMap<String, Integer> getTotalCountPerCity() {
         MyHashMap<String, Integer> totalCounts = new MyHashMap<>();
         for (Account acc : accounts.getValues()) {
-            Integer count = totalCounts.search(acc.getCity());
+            Integer count = totalCounts.get(acc.getCity());
             if (count == null) {
                 totalCounts.put(acc.getCity(), 1);
             } else {
@@ -56,16 +65,17 @@ class Bank3 {
         return totalCounts;
     }
 
-    public void reportCity(MyHashMap<String, Double> balances, MyHashMap<String, Integer> counts) {
+    public void reportCity(ArrayList<String> cities, MyHashMap<String, Double> balances,
+            MyHashMap<String, Integer> counts) {
         System.out.println();
         System.out.println("\n City \t \t Total Balance \t \t Average Balance");
-        for (String city : balances.getKeySet()) {
-            System.out.println(city + "\t \t " + balances.search(city) + " \t \t "
-                    + balances.search(city) / (double) counts.search(city));
+        for (String city : cities) {
+            System.out.println(city + "\t \t " + balances.get(city) + " \t \t "
+                    + balances.get(city) / (double) counts.get(city));
         }
     }
 
-    public MyHashMap<Integer, Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
+    public ArrayList<Integer> getTotalCountPerRange(ArrayList<Integer> ranges) {
         MyHashMap<Integer, Integer> totalCountsInRange = new MyHashMap<>();
         for (int i = 0; i < ranges.size() - 1; i++) {
             int max = ranges.get(i + 1);
@@ -78,7 +88,8 @@ class Bank3 {
             }
             totalCountsInRange.put(i, count);
         }
-        return totalCountsInRange;
+        return (ArrayList<Integer>) totalCountsInRange.getValues().stream()
+                .collect(Collectors.toList());
     }
 
     public void reportRanges(ArrayList<Integer> ranges, MyHashMap<Integer, Integer> countsPerRange) {
@@ -86,7 +97,7 @@ class Bank3 {
         for (int i = 0; i < ranges.size() - 1; i++) {
             System.out.println(
                     "Range " + i + ": Number of accounts between " + ranges.get(i) + " and " + ranges.get(i + 1) + " = "
-                            + countsPerRange.search(i));
+                            + countsPerRange.get(i));
         }
         System.out.println();
     }

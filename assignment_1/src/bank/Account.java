@@ -2,7 +2,7 @@ package bank;
 
 /**
  *
- * @author hooman
+ * @author Hooman
  */
 
 class Account {
@@ -36,6 +36,10 @@ class Account {
 
     public int getID() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getCity() {

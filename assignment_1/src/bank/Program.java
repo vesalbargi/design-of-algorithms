@@ -1,121 +1,68 @@
 package bank;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+
+/**
+ *
+ * @author Hooman
+ */
 
 public class Program {
-    public static void main(String[] args) {
-        Account acc1 = new Account(1, "Kim", 100, "Sydney");
-        Account acc2 = new Account(2, "Jack", 1800, "Sydney");
-        Account acc3 = new Account(3, "Jill", 20000, "Tehran");
-        Account acc4 = new Account(4, "Robert", 8000, "Tehran");
-        Bank bank = new Bank("Hooman Bank");
+    public static void main(String args[]) throws IOException {
+        test();
+        // Coordinator coordinator = new Coordinator();
+        // coordinator.experiment(1000, 50);
+    }
 
-        // adding accounts
-        bank.addAccount(acc1);
-        bank.addAccount(acc2);
-        bank.addAccount(acc3);
-        bank.addAccount(acc4);
-        if (bank.addAccount(acc4)) {
-            System.out.println("Account has been created successfully");
-        } else {
-            System.out.println("Account is duplicate and has not been created");
-        }
+    public static void test() {
+        int val[] = new int[] { 6, 10, 18, 43, 34, 32, 12, 6, 10, 18, 43, 34, 32, 12, 6, 10, 18, 43, 34, 32, 12 };
+        int key[] = new int[] { 9, 967, 27, 24, 5, 23, 143, 90, 3, 20, 247, 50, 13, 430, 900, 22, 29, 14, 15, 19, 43 };
 
-        // or better way
-        addAccount(bank, acc4);
+        MyHashMap<Integer, Integer> myHashMap = new MyHashMap<>();
+        JavaHashMap<Integer, Integer> javaHashMap = new JavaHashMap<>();
 
-        if (acc1.deposit(-60)) {
-            System.out.println(" deposite was succesful and the new balance is " + acc1.getBalance());
-        } else {
-            System.out.println(" deposite was not succesful");
-        }
+        ArrayList<SearchStructure<Integer, Integer>> structs = new ArrayList<SearchStructure<Integer, Integer>>();
+        structs.add(myHashMap);
+        structs.add(javaHashMap);
 
-        if (acc2.withdraw(600)) {
-            System.out.println(" withdraw was succesful and the new balance is " + acc2.getBalance());
-        } else {
-            System.out.println(" withdraw was not succesful");
-        }
+        for (SearchStructure<Integer, Integer> struct : structs) {
+            System.out.println(struct);
+            for (int i = 0; i < key.length; i++) {
+                if (!struct.insert(key[i], val[i]))
+                    System.out.println(struct.toString() + " : error in insert");
+                else
+                    struct.print();
+            }
 
-        // or this one which is a better design
-        // find an account
-        Account acc = bank.findAccount(3);
-        withdraw(acc, 50);
-
-        bank.printAccounts();
-        double total = bank.calcTotalBalance();
-        System.out.println("Total balance = " + total);
-
-        // search accounts
-        int id = 1;
-        Scanner sc = new Scanner(System.in);
-        while (id != 0) {
-            System.out.print(" Enter an account ID: ( 0 to exit) ");
-            id = sc.nextInt();
-            acc = bank.findAccount(id);
-            if (acc != null)
-                acc.print();
+            for (int i = 0; i < key.length; i++) {
+                Integer temp = struct.search(key[i]);
+                if ((temp == null) || (temp != val[i])) // test & validation
+                    System.out.println(struct.toString() + " : error in search. search result=" + temp
+                            + " but searched for key: " + key[i] + " expected val: " + val[i]);
+                // else
+                // System.out.println("good");
+            }
+            // insert duplicate
+            if (!struct.insert(9, 95))
+                System.out.println("error in insert");
             else
-                System.out.println(" Account has not been found");
-        }
+                struct.print();
+            // search not in the list
+            Integer temp = struct.search(76);
+            if ((temp == null) || (temp != 76)) // test & validation
+                System.out.println("error in search. search result=" + temp + " but searched for key: 76");
+            // delete not in the strcuture
+            if (!struct.delete(789)) {
+                System.out.println("error in delete");
+            }
 
-        // report total balances for all accounts for all given cities
-        // bank.reportCity1(); //hardcoded
-        // bank.reportRanges1(); //hardcoded
-
-        // Data aggregation
-
-        // Data Aggregation Report: print total and average balance per city
-        ArrayList<String> cities = bank.populateDistinctCityList();
-        ArrayList<Double> balances = bank.getTotalBalancePerCity(cities);
-        ArrayList<Integer> counts = bank.getTotalCountPerCity(cities);
-        bank.reportTotalPerCity(cities, counts, balances);
-
-        // Data Aggregation Report: print number of accounts per balance range
-        Integer[] r = { 1, 1000, 10000, 100000, 10000000 };
-        ArrayList<Integer> ranges = new ArrayList<Integer>(Arrays.asList(r));
-        ArrayList<Integer> countsPerRange = bank.getTotalCountPerRange(ranges);
-        bank.reportRanges(ranges, countsPerRange);
-
-        Bank2 bank2 = new Bank2("hooman Better Bank");
-
-        // adding accounts
-        bank2.addAccount(acc1);
-        bank2.addAccount(acc2);
-        bank2.addAccount(acc3);
-        bank2.addAccount(acc4);
-
-        // find an account
-        Account accn = bank2.findAccount(3);
-        withdraw(accn, 10);
-
-        // Data aggregation
-        HashMap<String, Double> cities2 = bank2.getTotalBalancePerCity();
-        HashMap<String, Integer> counts2 = bank2.getTotalCountPerCity();
-        bank2.reportCity(cities2, counts2);
-
-        HashMap<Integer, Integer> countsPerRange1 = bank2.getTotalCountPerRange(ranges);
-        bank2.reportRanges(ranges, countsPerRange1);
-
-    }
-
-    // UI method
-    public static void withdraw(Account acc, double amount) {
-        if (acc.withdraw(amount)) {
-            System.out.println(" withdraw was succesful and the new balance is " + acc.getBalance());
-        } else {
-            System.out.println(" withdraw was not succesful");
-        }
-    }
-
-    // UI method
-    public static void addAccount(Bank bank, Account acc) {
-        if (bank.addAccount(acc)) {
-            System.out.println("Account has been created successfully");
-        } else {
-            System.out.println("Account is duplicate and has not been created");
+            for (int i = 0; i < key.length; i++) {
+                if (!struct.delete(key[i])) {
+                    System.out.println("error in delete");
+                }
+                struct.print();
+            }
         }
     }
 }

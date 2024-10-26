@@ -25,8 +25,8 @@ public class Coordinator {
 
     public void experiment(int n, int maxRep) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
-        for (int num = 100; num <= n; num += 50) // all sizes
-        {
+        // all sizes
+        for (int num = 100; num <= n; num += 50) {
             for (int rep = 0; rep < maxRep; rep++) {
                 System.out.println("Testing n= " + num);
                 MyHashMap<Integer, Integer> myHashMap = new MyHashMap<>();
