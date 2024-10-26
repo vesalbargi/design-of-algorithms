@@ -13,6 +13,8 @@ public class Program {
         test();
         // Coordinator coordinator = new Coordinator();
         // coordinator.experiment(1000, 50);
+        // BankCoordinator bankCoordinator = new BankCoordinator();
+        // bankCoordinator.experiment(10000, 50);
     }
 
     public static void test() {

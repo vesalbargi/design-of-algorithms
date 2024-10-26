@@ -8,8 +8,7 @@ public class HoomanTestSimple {
     public static void main(String[] args) {
         ArrayList<String> cities;
         Integer[] ranges = { 0, 100, 1000, 5000, 10000, 20000, 25000, 45000, 50000, 80000, 85000, 87000, 88000, 100000,
-                110000,
-                120000, 122000, 130000, 200000, 250000, 300000, 310000, 400000, 400500, 800000, 850000, 1000000,
+                110000, 120000, 122000, 130000, 200000, 250000, 300000, 310000, 400000, 400500, 800000, 850000, 1000000,
                 1000900, 2000000, 200000000, 2000000000 };
         ArrayList<Integer> rangesList = new ArrayList<Integer>(Arrays.asList(ranges));
 
