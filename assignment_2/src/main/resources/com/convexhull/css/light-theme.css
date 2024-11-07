@@ -1,0 +1,117 @@
+.root {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+}
+
+.button {
+    -fx-background-color: #0066cc;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 8 16;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #005bb5;
+}
+
+.button:pressed {
+    -fx-background-color: #004999;
+    -fx-translate-y: 1px;
+}
+
+.button:disabled {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: #666666;
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+.label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+    -fx-padding: 5;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-field:focused {
+    -fx-border-color: #007bff;
+    -fx-background-color: #f0f0f0;
+}
+
+.text-field:hover {
+    -fx-border-color: #aaaaaa;
+}
+
+.text-area {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #000000;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5;
+    -fx-padding: 8;
+}
+
+.text-area:focused {
+    -fx-border-color: #007bff;
+    -fx-background-color: #f0f0f0;
+}
+
+.text-area:hover {
+    -fx-border-color: #aaaaaa;
+}
+
+.check-box {
+    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+}
+
+.check-box .box {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #999999;
+    -fx-border-radius: 5;
+}
+
+.check-box:hover .box {
+    -fx-background-color: #e0e0e0;
+}
+
+.check-box:selected .box {
+    -fx-background-color: #d0d0d0;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: #0066cc;
+}
+
+.radio-button {
+    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+}
+
+.radio-button .radio {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #999999;
+    -fx-border-radius: 10;
+}
+
+.radio-button .radio:hover {
+    -fx-background-color: #e0e0e0;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #d0d0d0;
+    -fx-border-color: #0066cc;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-background-color: #0066cc;
+}
