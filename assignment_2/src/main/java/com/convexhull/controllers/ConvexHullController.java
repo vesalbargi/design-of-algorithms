@@ -2,6 +2,8 @@ package com.convexhull.controllers;
 
 import java.util.ArrayList;
 
+import com.convexhull.models.Algorithm;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -95,13 +97,17 @@ public class ConvexHullController {
     private void displayPoints() {
         canvasClear();
         for (Point2D p : points) {
-            drawPoint(p.getX(), p.getY());
+            drawPoint(p);
             if (showXY.isSelected()) {
-                gc.setFill(Color.BLACK);
-                gc.fillText("(" + (int) p.getX() + ", " + (int) p.getY() + ")",
-                        p.getX() + 10, p.getY() + 10);
+                displayCoordinates(p);
             }
         }
+    }
+
+    private void displayCoordinates(Point2D point) {
+        gc.setFill(Color.BLACK);
+        gc.fillText("(" + (int) point.getX() + ", " + (int) point.getY() + ")",
+                point.getX() + 10, point.getY() + 10);
     }
 
     private void canvasClear() {
@@ -109,9 +115,26 @@ public class ConvexHullController {
         initializeCanvas();
     }
 
-    private void drawPoint(double x, double y) {
+    private void drawPoint(Point2D point) {
         gc.setFill(Color.RED);
-        gc.fillOval(x - 5, y - 5, 10, 10);
+        gc.fillOval(point.getX() - 5, point.getY() - 5, 10, 10);
+    }
+
+    private void drawConvexHull(ArrayList<Point2D> extrems) {
+        gc.setFill(Color.GREEN);
+        for (Point2D p : extrems) {
+            gc.fillOval(p.getX() - 5, p.getY() - 5, 10, 10);
+        }
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(3);
+        for (int i = 0; i < extrems.size() - 1; i++) {
+            Point2D p1 = extrems.get(i);
+            Point2D p2 = extrems.get(i + 1);
+            gc.strokeLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        }
+        Point2D p1 = extrems.get(extrems.size() - 1);
+        Point2D p2 = extrems.get(0);
+        gc.strokeLine(p1.getX(), p1.getY(), p2.getX(), p2.getY());
     }
 
     @FXML
@@ -135,7 +158,9 @@ public class ConvexHullController {
 
     @FXML
     private void handleAlgorithmSelection() {
+        Algorithm algorithm = new Algorithm();
         if (blindSearch.isSelected()) {
+            drawConvexHull(algorithm.blindSearch(points));
         } else if (quickHull.isSelected()) {
         } else if (grahamScan.isSelected()) {
         }

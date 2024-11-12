@@ -12,3 +12,7 @@ Below are screenshots showcasing the output of our algorithms:
 ![GUI](GUI.png)
 ![GUI2](GUI2.png)
 ![GUI3](GUI3.png)
+
+### Blind Search Output
+![BlindSearch](BlindSearch.png)
+![BlindSearch2](BlindSearch2.png)
