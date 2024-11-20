@@ -162,7 +162,9 @@ public class ConvexHullController {
         if (blindSearch.isSelected()) {
             drawConvexHull(algorithm.blindSearch(points));
         } else if (quickHull.isSelected()) {
+            drawConvexHull(algorithm.quickHull(points));
         } else if (grahamScan.isSelected()) {
+            drawConvexHull(algorithm.grahamScan(points));
         }
     }
 
