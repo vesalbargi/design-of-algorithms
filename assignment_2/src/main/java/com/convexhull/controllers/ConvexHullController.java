@@ -49,6 +49,7 @@ public class ConvexHullController {
     private static final String SUN_FILE = "/com/convexhull/images/sun.png";
 
     private ArrayList<Point2D> points = new ArrayList<>();
+    private Algorithm algorithm = new Algorithm();
     private boolean isDarkMode = true;
     private ImageView moonImageView;
     private ImageView sunImageView;
@@ -120,12 +121,12 @@ public class ConvexHullController {
         gc.fillOval(point.getX() - 5, point.getY() - 5, 10, 10);
     }
 
-    private void drawConvexHull(ArrayList<Point2D> extrems) {
+    private void drawConvexHull(ArrayList<Point2D> extrems, Color color) {
         gc.setFill(Color.GREEN);
         for (Point2D p : extrems) {
             gc.fillOval(p.getX() - 5, p.getY() - 5, 10, 10);
         }
-        gc.setStroke(Color.BLACK);
+        gc.setStroke(color);
         gc.setLineWidth(3);
         for (int i = 0; i < extrems.size() - 1; i++) {
             Point2D p1 = extrems.get(i);
@@ -158,13 +159,13 @@ public class ConvexHullController {
 
     @FXML
     private void handleAlgorithmSelection() {
-        Algorithm algorithm = new Algorithm();
+        displayPoints();
         if (blindSearch.isSelected()) {
-            drawConvexHull(algorithm.blindSearch(points));
+            drawConvexHull(algorithm.blindSearch(points), Color.PURPLE);
         } else if (quickHull.isSelected()) {
-            drawConvexHull(algorithm.quickHull(points));
+            drawConvexHull(algorithm.quickHull(points), Color.MAGENTA);
         } else if (grahamScan.isSelected()) {
-            drawConvexHull(algorithm.grahamScan(points));
+            drawConvexHull(algorithm.grahamScan(points), Color.VIOLET);
         }
     }
 

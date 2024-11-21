@@ -27,7 +27,7 @@
     <VBox spacing="10" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
         <RadioButton fx:id="blindSearch" text="Blind Search"
             onMouseClicked="#handleAlgorithmSelection" />
-        <RadioButton fx:id="quickHull" text="Quick-Hull" onMouseClicked="#handleAlgorithmSelection" />
+        <RadioButton fx:id="quickHull" text="Quick Hull" onMouseClicked="#handleAlgorithmSelection" />
         <RadioButton fx:id="grahamScan" text="Graham Scan"
             onMouseClicked="#handleAlgorithmSelection" />
         <CheckBox fx:id="showXY" text="Show X &amp; Y" onAction="#handleShowXYAction" />
