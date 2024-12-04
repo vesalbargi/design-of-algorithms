@@ -2,6 +2,8 @@ package com.convexhull;
 
 import java.io.IOException;
 
+import com.convexhull.test.Coordinator;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +19,11 @@ public class App extends Application {
     private static final int SCENE_WIDTH = 800;
     private static final int SCENE_HEIGHT = 600;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         launch(args);
+        Coordinator coordinator = new Coordinator();
+        // coordinator.experiment(1000, 50);
+        coordinator.autoTest();
     }
 
     @Override

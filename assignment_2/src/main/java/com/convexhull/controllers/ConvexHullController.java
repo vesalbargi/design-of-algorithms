@@ -2,7 +2,9 @@ package com.convexhull.controllers;
 
 import java.util.ArrayList;
 
-import com.convexhull.models.Algorithm;
+import com.convexhull.models.BlindSearch;
+import com.convexhull.models.GrahamScan;
+import com.convexhull.models.QuickHull;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Point2D;
@@ -27,19 +29,19 @@ public class ConvexHullController {
     @FXML
     private Button addButton;
     @FXML
-    private TextField inputFieldX;
+    private TextField xTextField;
     @FXML
-    private TextField inputFieldY;
+    private TextField yTextField;
     @FXML
-    private RadioButton blindSearch;
+    private RadioButton blindSearchRadio;
     @FXML
-    private RadioButton quickHull;
+    private RadioButton quickHullRadio;
     @FXML
-    private RadioButton grahamScan;
+    private RadioButton grahamScanRadio;
     @FXML
     private ToggleGroup toggleGroup;
     @FXML
-    private CheckBox showXY;
+    private CheckBox showXYCheckBox;
     @FXML
     private Canvas canvas;
 
@@ -49,7 +51,9 @@ public class ConvexHullController {
     private static final String SUN_FILE = "/com/convexhull/images/sun.png";
 
     private ArrayList<Point2D> points = new ArrayList<>();
-    private Algorithm algorithm = new Algorithm();
+    private BlindSearch blindSearch = new BlindSearch();
+    private QuickHull quickHull = new QuickHull();
+    private GrahamScan grahamScan = new GrahamScan();
     private boolean isDarkMode = true;
     private ImageView moonImageView;
     private ImageView sunImageView;
@@ -82,9 +86,9 @@ public class ConvexHullController {
 
     private void initializeToggleGroup() {
         toggleGroup = new ToggleGroup();
-        blindSearch.setToggleGroup(toggleGroup);
-        quickHull.setToggleGroup(toggleGroup);
-        grahamScan.setToggleGroup(toggleGroup);
+        blindSearchRadio.setToggleGroup(toggleGroup);
+        quickHullRadio.setToggleGroup(toggleGroup);
+        grahamScanRadio.setToggleGroup(toggleGroup);
         clearButton.setVisible(false);
     }
 
@@ -99,7 +103,7 @@ public class ConvexHullController {
         canvasClear();
         for (Point2D p : points) {
             drawPoint(p);
-            if (showXY.isSelected()) {
+            if (showXYCheckBox.isSelected()) {
                 displayCoordinates(p);
             }
         }
@@ -140,11 +144,11 @@ public class ConvexHullController {
 
     @FXML
     private void handleAddAction() {
-        double x = Double.parseDouble(inputFieldX.getText());
-        double y = Double.parseDouble(inputFieldY.getText());
+        double x = Double.parseDouble(xTextField.getText());
+        double y = Double.parseDouble(yTextField.getText());
         addPoint(x, y);
-        inputFieldX.clear();
-        inputFieldY.clear();
+        xTextField.clear();
+        yTextField.clear();
     }
 
     @FXML
@@ -160,12 +164,12 @@ public class ConvexHullController {
     @FXML
     private void handleAlgorithmSelection() {
         displayPoints();
-        if (blindSearch.isSelected()) {
-            drawConvexHull(algorithm.blindSearch(points), Color.PURPLE);
-        } else if (quickHull.isSelected()) {
-            drawConvexHull(algorithm.quickHull(points), Color.MAGENTA);
-        } else if (grahamScan.isSelected()) {
-            drawConvexHull(algorithm.grahamScan(points), Color.VIOLET);
+        if (blindSearchRadio.isSelected()) {
+            drawConvexHull(blindSearch.ComputeConvexHull(points), Color.PURPLE);
+        } else if (quickHullRadio.isSelected()) {
+            drawConvexHull(quickHull.ComputeConvexHull(points), Color.MAGENTA);
+        } else if (grahamScanRadio.isSelected()) {
+            drawConvexHull(grahamScan.ComputeConvexHull(points), Color.VIOLET);
         }
     }
 

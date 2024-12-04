@@ -18,19 +18,20 @@
     <VBox spacing="10" alignment="CENTER" AnchorPane.leftAnchor="150" AnchorPane.rightAnchor="150"
         AnchorPane.topAnchor="20">
         <HBox spacing="10" alignment="CENTER">
-            <TextField fx:id="inputFieldX" promptText="X Axis" />
-            <TextField fx:id="inputFieldY" promptText="Y Axis" />
+            <TextField fx:id="xTextField" promptText="X-Axis" />
+            <TextField fx:id="yTextField" promptText="Y-Axis" />
         </HBox>
         <Button fx:id="addButton" text="Add" onAction="#handleAddAction" prefWidth="150" />
     </VBox>
 
     <VBox spacing="10" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
-        <RadioButton fx:id="blindSearch" text="Blind Search"
+        <RadioButton fx:id="blindSearchRadio" text="Blind Search"
             onMouseClicked="#handleAlgorithmSelection" />
-        <RadioButton fx:id="quickHull" text="Quick Hull" onMouseClicked="#handleAlgorithmSelection" />
-        <RadioButton fx:id="grahamScan" text="Graham Scan"
+        <RadioButton fx:id="quickHullRadio" text="Quick Hull"
             onMouseClicked="#handleAlgorithmSelection" />
-        <CheckBox fx:id="showXY" text="Show X &amp; Y" onAction="#handleShowXYAction" />
+        <RadioButton fx:id="grahamScanRadio" text="Graham Scan"
+            onMouseClicked="#handleAlgorithmSelection" />
+        <CheckBox fx:id="showXYCheckBox" text="Show X &amp; Y" onAction="#handleShowXYAction" />
     </VBox>
 
     <HBox alignment="CENTER" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
