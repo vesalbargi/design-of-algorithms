@@ -1,0 +1,94 @@
+Case 1:
+
+ String Length: 1,208,322 characters
+ Pattern Length: 114,690 characters
+
+
+ Java Found index strings = 1,093,632
+ Time java String search = 1,507,259 ns
+
+
+ Found index with Naïve method = 1,093,632
+ Time Naïve method = 4,902,935 ns
+ Naïve method Number of search steps: 1,454,082 times
+
+
+ Found index with KMP method = 1,093,632
+ Time KMP method = 6,080,409 ns
+ KMP method Number of search steps: 1,208,322 times
+
+
+ Found index with Boyer-Moore method = 1,093,632
+ Time Boyer-Moore method = 240,473 ns
+
+
+ Found index with Z Algorithm method = 1,093,632
+ Time Z Algorithm method = 12,648,636 ns
+
+
+ Found index with Rabin-Karp method = 1,093,632
+ Time Rabin-Karp method = 10,000,990 ns
+
+
+Case 2:
+
+ String Length: 132,866 characters
+ Pattern Length: 7,170 characters
+
+
+ Java Found index strings = 125,696
+ Time java String search = 10,653,639 ns
+
+
+ Found index with Naïve method = 125,696
+ Time Naïve method = 20,384,673 ns
+ Naïve method Number of search steps: 21,702,206 times
+
+
+ Found index with KMP method = 125,696
+ Time KMP method = 590,597 ns
+ KMP method Number of search steps: 138,891 times
+
+
+ Found index with Boyer-Moore method = 125,696
+ Time Boyer-Moore method = 32,600 ns
+
+
+ Found index with Z Algorithm method = 125,696
+ Time Z Algorithm method = 1,348,756 ns
+
+
+ Found index with Rabin-Karp method = 125,696
+ Time Rabin-Karp method = 1,133,066 ns
+
+
+Case 3:
+
+ String Length: 268,800 characters
+ Pattern Length: 17,408 characters
+
+
+ Java Found index strings = 125,696
+ Time java String search = 10,642,472 ns
+
+
+ Found index with Naïve method = 125,696
+ Time Naïve method = 20,483,278 ns
+ Naïve method Number of search steps: 21,712,444 times
+
+
+ Found index with KMP method = 125,696
+ Time KMP method = 680,777 ns
+ KMP method Number of search steps: 149,129 times
+
+
+ Found index with Boyer-Moore method = 125,696
+ Time Boyer-Moore method = 4,636,650 ns
+
+
+ Found index with Z Algorithm method = 125,696
+ Time Z Algorithm method = 2,610,808 ns
+
+
+ Found index with Rabin-Karp method = 125,696
+ Time Rabin-Karp method = 1,415,960 ns
