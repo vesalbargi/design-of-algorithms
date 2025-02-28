@@ -2,7 +2,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UI {
-    public void mainMenu(Scanner sc) {
+    public void mainMenu(Scanner sc) throws Exception {
         while (true) {
             System.out.println("\nMain Menu:");
             System.out.println("[1] Core");
@@ -37,7 +37,7 @@ public class UI {
     private void standardMenu(Scanner sc) {
     }
 
-    private void coreMenu(Scanner sc) {
+    private void coreMenu(Scanner sc) throws Exception {
         TestRunner testRunner = new TestRunner();
         while (true) {
             System.out.println("\nChoose a problem:");
@@ -45,12 +45,14 @@ public class UI {
             System.out.println("[2] Job Scheduling: Backtracking");
             System.out.println("[3] Back to Main Menu");
             int problemChoice = getValidIntInput(sc);
+            sc.nextLine();
             switch (problemChoice) {
                 case 1:
-                    testRunner.testTSPDP();
+                    testRunner.runTSPDP();
                     break;
                 case 2:
-                    testRunner.testJSBT();
+                    testRunner.runJSBT();
+                    runCoordinatorPrompt(sc, testRunner);
                     break;
                 case 3:
                     System.out.println("Returning to main menu...");
@@ -59,6 +61,18 @@ public class UI {
                     System.out.println("Invalid option. Please try again.");
                     break;
             }
+        }
+    }
+
+    private void runCoordinatorPrompt(Scanner sc, TestRunner testRunner) throws Exception {
+        System.out.print("\nWould you like to run the coordinator? (yes/no): ");
+        String response = sc.nextLine().trim().toLowerCase();
+        if (response.equals("yes")) {
+            testRunner.runCoordinator();
+        } else if (response.equals("no")) {
+            System.out.println("Coordinator execution cancelled.");
+        } else {
+            System.out.println("Invalid input. Please answer with 'yes' or 'no'.");
         }
     }
 

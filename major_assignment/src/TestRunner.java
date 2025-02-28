@@ -8,7 +8,7 @@ public class TestRunner {
             { 8, 8, 9, 0 }
     };
 
-    public void testTSPDP() {
+    public void runTSPDP() {
         TSPDP tspdp = new TSPDP(costMatrix);
         System.out.println("\nTSP Problem Details:");
         System.out.println("---------------------");
@@ -19,7 +19,7 @@ public class TestRunner {
         System.out.println("Minimum cost of TSP tour: " + tspdp.findMinCost());
     }
 
-    public void testJSBT() {
+    public void runJSBT() {
         int[] deadlines = { 9, 5, 3, 14, 22, 25, 12 };
         int[] executionTimes = { 2, 3, 1, 3, 1, 7, 3 };
 
@@ -45,6 +45,11 @@ public class TestRunner {
         System.out.println("------------------------");
         jobScheduling2.solve();
         jobScheduling2.report();
+    }
+
+    public void runCoordinator() throws Exception {
+        Coordinator coordinator = new Coordinator();
+        coordinator.experiment(50, 5);
     }
 
     private void printMatrix(int[][] matrix) {
