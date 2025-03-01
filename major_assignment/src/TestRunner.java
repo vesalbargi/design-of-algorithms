@@ -28,6 +28,15 @@ public class TestRunner {
         System.out.println("Deadlines: " + Arrays.toString(deadlines));
         System.out.println("Execution Times: " + Arrays.toString(executionTimes));
 
+        JobScheduling jobScheduling = new JobScheduling();
+        System.out.println("\nJobScheduling Results:");
+        System.out.println("-----------------------");
+        System.out.println("Greedy:");
+        jobScheduling.jobSchedulingGreedyEDF(deadlines, executionTimes);
+        System.out.println("\nBlind:");
+        jobScheduling.jobSchedulingBlindOpt(deadlines, executionTimes);
+        jobScheduling.reportBlindOpt();
+
         JobScheduling1 jobScheduling1 = new JobScheduling1(deadlines, executionTimes);
         System.out.println("\nJobScheduling1 Results:");
         System.out.println("------------------------");
@@ -36,7 +45,7 @@ public class TestRunner {
 
         JobScheduling1Opt jobScheduling1Opt = new JobScheduling1Opt(deadlines, executionTimes);
         System.out.println("\nJobScheduling1Opt Results:");
-        System.out.println("--------------------------");
+        System.out.println("---------------------------");
         jobScheduling1Opt.solve();
         jobScheduling1Opt.report();
 

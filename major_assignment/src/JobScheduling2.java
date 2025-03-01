@@ -5,6 +5,7 @@ public class JobScheduling2 extends BackTrackingOptimization<Integer> {
     private int[] deadlines;
     private int[] executionTimes;
     private int currentTime;
+    private int[] bestAnswer;
 
     public JobScheduling2(int[] deadlines, int[] executionTimes) {
         super(new Integer[deadlines.length], new Integer[deadlines.length]);
@@ -12,6 +13,7 @@ public class JobScheduling2 extends BackTrackingOptimization<Integer> {
         this.deadlines = deadlines;
         this.executionTimes = executionTimes;
         this.currentTime = 0;
+        this.bestAnswer = new int[0];
         sortJobs();
     }
 
@@ -68,13 +70,16 @@ public class JobScheduling2 extends BackTrackingOptimization<Integer> {
     }
 
     public void report() {
-        System.out.println("Selected Jobs:");
+        int count = 0;
+        int[] tempBest = new int[n];
         for (int i = 0; i < n; i++) {
             if (finalX[i] != null) {
-                System.out.println("Job " + (finalX[i] + 1) + " with execution time " + executionTimes[finalX[i]]
-                        + " and deadline " + deadlines[finalX[i]]);
+                int jobIndex = finalX[i];
+                tempBest[count++] = executionTimes[jobIndex];
             }
         }
+        bestAnswer = Arrays.copyOf(tempBest, count);
+        System.out.println("Best answer execution times: " + Arrays.toString(bestAnswer));
         System.out.println("Total Scheduled Jobs: " + finalProfit);
         System.out.println("Number of nodes generated: " + numberOfNodes);
     }

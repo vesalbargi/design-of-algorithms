@@ -6,19 +6,8 @@ import java.util.Arrays;
  */
 
 public class JobScheduling {
-    public static void main(String[] args) {
-        JobScheduling jobScheduling = new JobScheduling();
-        int[] deadlines = { 9, 5, 3, 14, 22, 25, 12 };
-        int[] executionTimes = { 2, 3, 1, 3, 1, 7, 3 };
-        jobScheduling.jobSchedulingGreedyEDF(deadlines, executionTimes);
-        jobScheduling.jobSchedulingBlind(deadlines, executionTimes, 0);
-        System.out.println("Min asnwer returned from the method: "
-                + jobScheduling.jobSchedulingBlindOpt(deadlines, executionTimes));
-        System.out.println("Best asnwer execution times: " + Arrays.toString(jobScheduling.bestAnswer));
-    }
-
-    public int[] bestAnswer;
-    public double minAnswer = 1000000000;
+    private int[] bestAnswer;
+    private double minAnswer = 1000000000;
 
     public void jobSchedulingBlind(int[] deadlines, int[] executionTimes, int k) {
         if (k == deadlines.length)
@@ -58,6 +47,11 @@ public class JobScheduling {
             swap(executionTimes, i, k);
         }
         return minAnswer;
+    }
+
+    public void reportBlindOpt() {
+        System.out.println("Min asnwer returned from the method: " + minAnswer);
+        System.out.println("Best asnwer execution times: " + Arrays.toString(bestAnswer));
     }
 
     private boolean valid(int[] deadlines, int[] executionTimes) {
@@ -100,11 +94,11 @@ public class JobScheduling {
             if (clock > data[i][0])
                 return;
         }
-        System.out.print("Greedy -> deadlines: ");
+        System.out.print("Deadlines: ");
         for (int i = 0; i < deadlines.length; i++) {
             System.out.print(data[i][0] + ", ");
         }
-        System.out.print(" Execution Times: ");
+        System.out.print("Execution Times: ");
         for (int i = 0; i < deadlines.length; i++) {
             System.out.print(data[i][1] + ", ");
         }
