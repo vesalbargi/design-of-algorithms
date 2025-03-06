@@ -3,12 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Hooman
- */
-
-public class Coordinator {
+public class JSCoordinator {
     private int[] generateArray(int n, int min, int max) {
         int[] array = new int[n];
         for (int i = 0; i < n; i++) {
@@ -46,15 +41,17 @@ public class Coordinator {
                     writer.write((finish - begin) + ",");
                 }
 
-                // long startBlind = getTime();
-                // jobScheduling.jobSchedulingBlindOpt(deadlines, executionTimes);
-                // long endBlind = getTime();
-                // writer.write((endBlind - startBlind) + ",");
-
                 long startGreedy = getTime();
                 jobScheduling.jobSchedulingGreedyEDF(deadlines, executionTimes);
                 long endGreedy = getTime();
                 writer.write((endGreedy - startGreedy) + ",");
+
+                if (num <= 5) {
+                    long startBlind = getTime();
+                    jobScheduling.jobSchedulingBlindOpt(deadlines, executionTimes);
+                    long endBlind = getTime();
+                    writer.write((endBlind - startBlind) + ",");
+                }
                 writer.write("\n");
             }
         }

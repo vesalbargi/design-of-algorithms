@@ -57,8 +57,8 @@ public class TestRunner {
     }
 
     public void runCoordinator() throws Exception {
-        Coordinator coordinator = new Coordinator();
-        coordinator.experiment(50, 5);
+        JSCoordinator jsCoordinator = new JSCoordinator();
+        jsCoordinator.experiment(50, 5);
     }
 
     private void printMatrix(int[][] matrix) {
