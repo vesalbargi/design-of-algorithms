@@ -139,6 +139,8 @@ public class TestRunner {
                 jsCoordinator.experiment(50, 5);
                 break;
             case "Knapsack":
+                KnapsackCoordinator knapsackCoordinator = new KnapsackCoordinator();
+                knapsackCoordinator.experiment(1000, 5);
                 break;
             default:
                 break;
