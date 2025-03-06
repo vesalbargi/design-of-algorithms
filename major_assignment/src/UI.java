@@ -2,6 +2,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UI {
+    private TestRunner testRunner = new TestRunner();
+
     public void mainMenu(Scanner sc) throws Exception {
         while (true) {
             System.out.println("\nMain Menu:");
@@ -34,11 +36,33 @@ public class UI {
 
     }
 
-    private void standardMenu(Scanner sc) {
+    private void standardMenu(Scanner sc) throws Exception {
+        while (true) {
+            System.out.println("\nChoose a problem:");
+            System.out.println("[1] Assignment: Backtracking");
+            System.out.println("[2] Knapsack: Branch and Bound");
+            System.out.println("[3] Back to Main Menu");
+            int problemChoice = getValidIntInput(sc);
+            sc.nextLine();
+            switch (problemChoice) {
+                case 1:
+                    testRunner.runAssignmentBT();
+                    break;
+                case 2:
+                    testRunner.runKnapsackBB();
+                    runCoordinatorPrompt(sc, testRunner, "Knapsack");
+                    break;
+                case 3:
+                    System.out.println("Returning to main menu...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        }
     }
 
     private void coreMenu(Scanner sc) throws Exception {
-        TestRunner testRunner = new TestRunner();
         while (true) {
             System.out.println("\nChoose a problem:");
             System.out.println("[1] TSP: Dynamic Programming");
@@ -52,7 +76,7 @@ public class UI {
                     break;
                 case 2:
                     testRunner.runJSBT();
-                    runCoordinatorPrompt(sc, testRunner);
+                    runCoordinatorPrompt(sc, testRunner, "JS");
                     break;
                 case 3:
                     System.out.println("Returning to main menu...");
@@ -64,11 +88,11 @@ public class UI {
         }
     }
 
-    private void runCoordinatorPrompt(Scanner sc, TestRunner testRunner) throws Exception {
+    private void runCoordinatorPrompt(Scanner sc, TestRunner testRunner, String algorithm) throws Exception {
         System.out.print("\nWould you like to run the coordinator? (yes/no): ");
         String response = sc.nextLine().trim().toLowerCase();
         if (response.equals("yes")) {
-            testRunner.runCoordinator();
+            testRunner.runCoordinator(algorithm);
         } else if (response.equals("no")) {
             System.out.println("Coordinator execution cancelled.");
         } else {
