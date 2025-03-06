@@ -14,3 +14,9 @@ Below are screenshots showcasing the output of our algorithms:
 
 ### Job Scheduling Backtracking Output
 ![JSBT](JSBT.png)
+
+### Assignment Backtracking Output
+![AssignmentBT](AssignmentBT.png)
+
+### Knapsack Branch and Bound Output
+![KnapsackBB](KnapsackBB.png)
