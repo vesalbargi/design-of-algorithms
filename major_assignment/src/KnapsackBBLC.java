@@ -8,13 +8,13 @@ public class KnapsackBBLC extends KnapsackBB {
 
     @Override
     public int solve() {
-        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingDouble(n1 -> -n1.bound));
-        Node root = new Node(-1, 0, 0, 0, null, false);
+        PriorityQueue<KnapsackNode> pq = new PriorityQueue<>(Comparator.comparingDouble(n1 -> -n1.bound));
+        KnapsackNode root = new KnapsackNode(-1, 0, 0, 0, null, false);
         root.bound = bound(root);
         pq.add(root);
         int maxProfit = 0;
         while (!pq.isEmpty()) {
-            Node node = pq.poll();
+            KnapsackNode node = pq.poll();
             if (node.weight <= capacity && node.profit > maxProfit) {
                 maxProfit = node.profit;
             }
@@ -25,7 +25,8 @@ public class KnapsackBBLC extends KnapsackBB {
             if (nextLevel >= n) {
                 continue;
             }
-            Node left = new Node(nextLevel, node.profit + profits[nextLevel], node.weight + weights[nextLevel], 0, node,
+            KnapsackNode left = new KnapsackNode(nextLevel, node.profit + profits[nextLevel],
+                    node.weight + weights[nextLevel], 0, node,
                     true);
             left.bound = bound(left);
             if (left.weight <= capacity) {
@@ -36,7 +37,7 @@ public class KnapsackBBLC extends KnapsackBB {
                     pq.add(left);
                 }
             }
-            Node right = new Node(nextLevel, node.profit, node.weight, 0, node, false);
+            KnapsackNode right = new KnapsackNode(nextLevel, node.profit, node.weight, 0, node, false);
             right.bound = bound(right);
             if (right.bound > maxProfit) {
                 pq.add(right);

@@ -26,7 +26,7 @@ public abstract class KnapsackBB implements Solve {
         }
     }
 
-    protected double bound(Node u) {
+    protected double bound(KnapsackNode u) {
         if (u.weight >= capacity)
             return 0;
         double profitBound = u.profit;
@@ -39,5 +39,21 @@ public abstract class KnapsackBB implements Solve {
         if (j < n)
             profitBound += (capacity - totalWeight) * ((double) profits[j] / weights[j]);
         return profitBound;
+    }
+}
+
+class KnapsackNode {
+    public int level, profit, weight;
+    public double bound;
+    public KnapsackNode parent;
+    public boolean include;
+
+    public KnapsackNode(int level, int profit, int weight, double bound, KnapsackNode parent, boolean include) {
+        this.level = level;
+        this.profit = profit;
+        this.weight = weight;
+        this.bound = bound;
+        this.parent = parent;
+        this.include = include;
     }
 }

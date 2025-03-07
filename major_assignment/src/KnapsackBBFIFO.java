@@ -8,13 +8,13 @@ public class KnapsackBBFIFO extends KnapsackBB {
 
     @Override
     public int solve() {
-        Queue<Node> queue = new LinkedList<>();
-        Node root = new Node(-1, 0, 0, 0, null, false);
+        Queue<KnapsackNode> queue = new LinkedList<>();
+        KnapsackNode root = new KnapsackNode(-1, 0, 0, 0, null, false);
         root.bound = bound(root);
         queue.add(root);
         int maxProfit = 0;
         while (!queue.isEmpty()) {
-            Node node = queue.poll();
+            KnapsackNode node = queue.poll();
             if (node.weight <= capacity && node.profit > maxProfit) {
                 maxProfit = node.profit;
             }
@@ -25,7 +25,8 @@ public class KnapsackBBFIFO extends KnapsackBB {
             if (nextLevel >= n) {
                 continue;
             }
-            Node left = new Node(nextLevel, node.profit + profits[nextLevel], node.weight + weights[nextLevel], 0, node,
+            KnapsackNode left = new KnapsackNode(nextLevel, node.profit + profits[nextLevel],
+                    node.weight + weights[nextLevel], 0, node,
                     true);
             left.bound = bound(left);
             if (left.weight <= capacity) {
@@ -36,7 +37,7 @@ public class KnapsackBBFIFO extends KnapsackBB {
                     queue.add(left);
                 }
             }
-            Node right = new Node(nextLevel, node.profit, node.weight, 0, node, false);
+            KnapsackNode right = new KnapsackNode(nextLevel, node.profit, node.weight, 0, node, false);
             right.bound = bound(right);
             if (right.bound > maxProfit) {
                 queue.add(right);
