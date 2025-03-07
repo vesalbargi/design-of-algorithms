@@ -21,7 +21,6 @@ public class TestRunner {
     public void runJSBT() {
         int[] deadlines = { 9, 5, 3, 14, 22, 25, 12 };
         int[] executionTimes = { 2, 3, 1, 3, 1, 7, 3 };
-
         System.out.println("\nJob Scheduling Problem Details:");
         System.out.println("--------------------------------");
         System.out.println("Deadlines: " + Arrays.toString(deadlines));
@@ -130,6 +129,37 @@ public class TestRunner {
         } else {
             System.out.println("Validation Failed: Branch and Bound methods do not match Dynamic Programming.");
         }
+    }
+
+    public void runAssignmentBB() {
+        int[][] costMatrix = {
+                { 9, 2, 7, 8 },
+                { 6, 4, 3, 7 },
+                { 5, 8, 1, 8 },
+                { 7, 6, 9, 4 }
+        };
+        AssignmentBB assignmentBB = new AssignmentBB(costMatrix);
+        System.out.println("\nAssignment Problem Details:");
+        System.out.println("----------------------------");
+        System.out.println("Cost Matrix:");
+        printMatrix(costMatrix);
+        System.out.println("\nSolution:");
+        System.out.println("----------");
+        assignmentBB.solve();
+    }
+
+    public void runJSBB() {
+        int[] deadlines = { 9, 5, 3, 14, 22, 25, 12 };
+        int[] executionTimes = { 2, 3, 1, 3, 1, 7, 3 };
+        System.out.println("\nJob Scheduling Problem Details:");
+        System.out.println("--------------------------------");
+        System.out.println("Deadlines: " + Arrays.toString(deadlines));
+        System.out.println("Execution Times: " + Arrays.toString(executionTimes));
+
+        JobSchedulingBB jobSchedulingBB = new JobSchedulingBB(deadlines, executionTimes);
+        System.out.println("\nJobSchedulingBB Results:");
+        System.out.println("------------------------");
+        jobSchedulingBB.solve();
     }
 
     public void runCoordinator(String algorithm) throws Exception {

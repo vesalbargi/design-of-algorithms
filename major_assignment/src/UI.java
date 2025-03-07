@@ -33,7 +33,27 @@ public class UI {
     }
 
     private void advancedMenu(Scanner sc) {
-
+        while (true) {
+            System.out.println("\nChoose a problem:");
+            System.out.println("[1] Assignment: Branch and Bound");
+            System.out.println("[2] Job Scheduling: Branch and Bound");
+            System.out.println("[3] Back to Main Menu");
+            int problemChoice = getValidIntInput(sc);
+            switch (problemChoice) {
+                case 1:
+                    testRunner.runAssignmentBB();
+                    break;
+                case 2:
+                    testRunner.runJSBB();
+                    break;
+                case 3:
+                    System.out.println("Returning to main menu...");
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        }
     }
 
     private void standardMenu(Scanner sc) throws Exception {
