@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class JobScheduling2 extends BackTrackingOptimization<Integer> {
-    private int n; // Number of jobs
+    private int n;
     private int[] deadlines;
     private int[] executionTimes;
     private int currentTime;
@@ -18,13 +18,13 @@ public class JobScheduling2 extends BackTrackingOptimization<Integer> {
     }
 
     private void sortJobs() {
-        int[][] jobs = new int[n][3]; // [deadline, execution time, index]
+        int[][] jobs = new int[n][3];
         for (int i = 0; i < n; i++) {
             jobs[i][0] = deadlines[i];
             jobs[i][1] = executionTimes[i];
             jobs[i][2] = i;
         }
-        Arrays.sort(jobs, (a, b) -> Integer.compare(a[0], b[0])); // Sort by earliest deadline
+        Arrays.sort(jobs, (a, b) -> Integer.compare(a[0], b[0]));
         for (int i = 0; i < n; i++) {
             deadlines[i] = jobs[i][0];
             executionTimes[i] = jobs[i][1];
@@ -61,7 +61,7 @@ public class JobScheduling2 extends BackTrackingOptimization<Integer> {
 
     @Override
     protected boolean isSolution(int k) {
-        return true; // Any node is a potential solution
+        return true;
     }
 
     @Override

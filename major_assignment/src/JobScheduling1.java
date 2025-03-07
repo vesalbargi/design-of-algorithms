@@ -1,10 +1,10 @@
 import java.util.Arrays;
 
 public class JobScheduling1 extends BackTracking<Integer> {
-    private int n; // Number of jobs
+    private int n;
     private int[] deadlines;
     private int[] executionTimes;
-    private int[] finalX; // Best Solution Tuple
+    private int[] finalX;
     private int finalProfit;
     private int[] bestAnswer;
 
@@ -20,13 +20,13 @@ public class JobScheduling1 extends BackTracking<Integer> {
     }
 
     private void sortJobs() {
-        int[][] jobs = new int[n][3]; // [deadline, execution time, index]
+        int[][] jobs = new int[n][3];
         for (int i = 0; i < n; i++) {
             jobs[i][0] = deadlines[i];
             jobs[i][1] = executionTimes[i];
             jobs[i][2] = i;
         }
-        Arrays.sort(jobs, (a, b) -> Integer.compare(a[0], b[0])); // Sort by earliest deadline first
+        Arrays.sort(jobs, (a, b) -> Integer.compare(a[0], b[0]));
         for (int i = 0; i < n; i++) {
             deadlines[i] = jobs[i][0];
             executionTimes[i] = jobs[i][1];
@@ -35,7 +35,7 @@ public class JobScheduling1 extends BackTracking<Integer> {
 
     @Override
     protected Integer[] nodeValues(int k) {
-        return new Integer[] { 1, 0 }; // 1 means job is selected, 0 means not selected
+        return new Integer[] { 1, 0 };
     }
 
     @Override
@@ -45,7 +45,7 @@ public class JobScheduling1 extends BackTracking<Integer> {
             if (x[i] == 1) {
                 clock += executionTimes[i];
                 if (clock > deadlines[i]) {
-                    return 0; // Prune infeasible schedules
+                    return 0;
                 }
             }
         }
