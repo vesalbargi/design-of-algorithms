@@ -1,0 +1,25 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+
+# Gradle
+bin/
+lib/
+build/
+.gradle/
+gradle-app.setting
+
+# IDE-specific files
+.idea/
+.vscode/
+*.iml
