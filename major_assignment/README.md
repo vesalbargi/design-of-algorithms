@@ -20,3 +20,9 @@ Below are screenshots showcasing the output of our algorithms:
 
 ### Knapsack Branch and Bound Output
 ![KnapsackBB](KnapsackBB.png)
+
+### Assignment Branch and Bound Output
+![AssignmentBB](AssignmentBB.png)
+
+### Job Scheduling Branch and Bound Output
+![JSBB](JSBB.png)
